@@ -2,6 +2,7 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [org.clojure/data.json "0.2.4"]
                  [org.clojure/algo.generic "0.1.2"]
+                 [clj-time "0.6.0"]
                  [com.h2database/h2 "1.3.174"]
                  [korma "0.3.0-RC6"]
                  [hiccup "1.0.5"]

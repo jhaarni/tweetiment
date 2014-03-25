@@ -1,17 +1,19 @@
 
 div {
   text-align: center; 
+  font-family: "Helvetica", Arial, Sans-serif; 
 }
 
 html, body {height: 100%;}
 
 h1 {
   color: #55ACEE; font-size: 48px; 
-  font-family: "Helvetica", Arial, Sans-serif; margin: 35px;
+  margin: 35px;
 }
 
 table {
   border-collapse: collapse;
+  min-width: 300px;
 }
 
 table, th, td {
@@ -19,7 +21,7 @@ table, th, td {
 }
 
 td, th {
-  text-align:left;
+  text-align: left;
   padding: 4px;
 }
 
@@ -46,7 +48,6 @@ a:visited.blue {
 #navi {
   color: black;
   font-size: 12px;
-  font-family: "Helvetica", Arial, Sans-serif; 
   margin: 10px;
 }
 
@@ -90,7 +91,6 @@ a:visited.blue {
 
 #text {
   font-size: 14px;
-  font-family: "Helvetica", Arial, Sans-serif; 
   margin: 20px;
 }
 
@@ -100,14 +100,12 @@ a:visited.blue {
 
 #footer {
   font-color: black;
-  font-family: "Helvetica", Arial, Sans-serif; 
   font-size: 12px;
   height: 150px;
   background-image: url('clouds.png');
   position: relative;
   margin-top: -150px; /* negative value of footer height */
   clear: both;
-  /* line-height: 150px; */
 }
 
 

@@ -1,5 +1,7 @@
 (ns tweetiment.web
   (:require
+    [clj-time.coerce :as c]
+    [clj-time.format :as f]
     [clojure.string :as s]
     [ring.util.codec :refer [url-encode]]
     [noir.core :refer [defpage defpartial]]
@@ -29,6 +31,11 @@
 
 (defn seq-join [delim sequence]
   (rest (interleave (repeat (count sequence) delim) sequence)))
+
+(defn fmt-date [date]
+  (let [dt (c/from-date date)
+        fmt (f/formatter "MM/dd/yyyy")]
+    (f/unparse fmt dt)))
 
 (defpartial navi [current]
   [:div#navi  
@@ -75,7 +82,7 @@
       (link-to 
         {:class "twitter-share-button" :data-lang "en"} 
         (str "https://twitter.com/share?text=" 
-          (url-encode (str "I got " num " as my Tweet Happiness Quotient! See yours at HappyTweeter.com")))
+          (url-encode (str "I got " num " as my Tweet Happiness Quotient! See yours at http://HappyTweeter.com")))
         "Tweet")])
 
 (defpartial error-page []
@@ -91,10 +98,11 @@
 
 (defpartial scores [lst]
   [:div#highscore
+    [:h2 "Highscores"]
     [:table#pure-table-horizontal 
     [:tr  [:th "Name"] [:th "THQ"] [:th "Date"]]
     (for [score lst]
-      [:tr [:td (:NAME score)] [:td (:THQ score)] [:td (:TIMESTAMP score)]])]])
+      [:tr [:td (:NAME score)] [:td (:THQ score)] [:td (fmt-date (:TIMESTAMP score))]])]])
 
 (set-page! 404 (layout :error (not-found)))
 

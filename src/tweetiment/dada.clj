@@ -48,4 +48,10 @@
   (select highscore))
 
 (defn get-top-scores [n]
-  (select highscore (order :THQ :desc) (limit n)))
+  (select highscore 
+    (fields :NAME :THQ) 
+    (order :THQ :desc) 
+    (aggregate (max :TIMESTAMP) :TIMESTAMP) 
+    (group :NAME :THQ) 
+    (limit n)))
+
