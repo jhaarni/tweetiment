@@ -1,14 +1,13 @@
 # tweetiment
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure application that calculates a Tweet Happiness Quota for a twitter feed.
 
 ## Usage
 
-FIXME
+lein run
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 jhaarni
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License either version 1.0
