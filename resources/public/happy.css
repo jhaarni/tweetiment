@@ -1,0 +1,115 @@
+
+div {
+  text-align: center; 
+}
+
+html, body {height: 100%;}
+
+h1 {
+  color: #55ACEE; font-size: 48px; 
+  font-family: "Helvetica", Arial, Sans-serif; margin: 35px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+td, th {
+  text-align:left;
+  padding: 4px;
+}
+
+div.thq {
+  color: #00CC33;
+}
+
+div.neg {
+  color: red;
+}
+
+table {
+  margin: 0 auto;
+}
+
+.blue {
+  color: black;
+}
+
+a:visited.blue {
+  color: black;
+}
+
+#navi {
+  color: black;
+  font-size: 12px;
+  font-family: "Helvetica", Arial, Sans-serif; 
+  margin: 10px;
+}
+
+#result {
+  min-height: 90px;
+  font-size: 90px;  
+}
+
+#error {
+  color: red;
+  font-size: 48px;
+}
+
+#wrap {
+  min-height: 100%;
+}
+
+#content {
+  overflow: auto;
+  padding-bottom: 150px;
+}
+
+#image {
+  margin: 75px; 
+  height: 150;
+}
+
+#small-image {
+  margin: 50px; 
+  height: 100px;
+}
+
+#tweet {
+  height: 40px;
+}
+
+#login {
+  margin: 20px;
+  height: 20px;
+}
+
+#text {
+  font-size: 14px;
+  font-family: "Helvetica", Arial, Sans-serif; 
+  margin: 20px;
+}
+
+#pre {
+  font-size: 12px;
+}
+
+#footer {
+  font-color: black;
+  font-family: "Helvetica", Arial, Sans-serif; 
+  font-size: 12px;
+  height: 150px;
+  background-image: url('clouds.png');
+  position: relative;
+  margin-top: -150px; /* negative value of footer height */
+  clear: both;
+  /* line-height: 150px; */
+}
+
+
+
+
