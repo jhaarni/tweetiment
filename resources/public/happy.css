@@ -11,18 +11,32 @@ h1 {
   margin: 35px;
 }
 
+h2 {
+  color: #66757f;
+}
+
 table {
   border-collapse: collapse;
   min-width: 300px;
 }
 
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid #55ACEE;
 }
 
 td, th {
   text-align: left;
   padding: 4px;
+}
+
+th {
+  background-color: #55ACEE;
+  color: white;
+}
+
+td {
+  background-color: #F5F8FA;
+  color: #292F33;  
 }
 
 div.thq {
@@ -104,7 +118,7 @@ a:visited.blue {
   height: 150px;
   background-image: url('clouds.png');
   position: relative;
-  margin-top: -150px; /* negative value of footer height */
+  margin-top: -150px; 
   clear: both;
 }
 
