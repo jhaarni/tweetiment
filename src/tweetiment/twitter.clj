@@ -1,6 +1,7 @@
 (ns tweetiment.twitter
   (:require
-   [tweetiment.util :refer [slurpr]]
+   [tweetiment.util :refer [as-resource]]
+   [clojure.java.io :as io]
    [oauth.client :refer :all]   
    [twitter.oauth :refer :all]
    [twitter.callbacks :refer :all]
@@ -10,7 +11,14 @@
   (:import
    (twitter.callbacks.protocols SyncSingleCallback)))
 
-(def config (edn/read-string (slurpr "config.edn")))
+(def config 
+  (if-let [res (as-resource "config.edn")] 
+    (edn/read-string (slurp (io/file res)))
+    ;else
+    {:api-key (System/getenv "TW_API_KEY")
+     :api-secret (System/getenv "TW_API_SECRET")
+     :access-token (System/getenv "TW_ACCESS_TOKEN")
+     :token-secret (System/getenv "TW_TOKEN_SECRET")}))
 
 (def my-creds (make-oauth-creds (:api-key config)
                                 (:api-secret config)

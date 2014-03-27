@@ -8,5 +8,6 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 config.edn
+config.sh
 *.db
 .DS_Store
