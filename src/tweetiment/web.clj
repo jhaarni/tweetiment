@@ -107,7 +107,7 @@
     [:table#pure-table-horizontal 
     [:tr  [:th "Name"] [:th "THQ"] [:th "Date"]]
     (for [score lst]
-      [:tr [:td (:name score)] [:td (:thq score)] [:td (fmt-date (:TIMESTAMP score))]])]])
+      [:tr [:td (:name score)] [:td (:thq score)] [:td (fmt-date (:timestamp score))]])]])
 
 (set-page! 404 (layout :error (not-found)))
 
