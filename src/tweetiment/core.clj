@@ -1,5 +1,6 @@
 (ns tweetiment.core
   (:require [clojure.string :as s]
+            [tweetiment.util :refer [slurpr]]
             [clojure.java.io :as io]
             [clojure.data.json :as json]
             [clojure.algo.generic.functor :as fun]
@@ -18,7 +19,7 @@
   (s/split l #"\t+"))
 
 (defn read-scores [f]
-  (let [lines (s/split-lines (slurp f))
+  (let [lines (s/split-lines (slurpr f))
         pairs (map make-pair lines)
         raw-map (apply hash-map (flatten pairs))]
     (fun/fmap read-string raw-map)))

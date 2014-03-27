@@ -1,5 +1,6 @@
 (ns tweetiment.web
   (:require
+    [tweetiment.util :refer [slurpr]]
     [clj-time.coerce :as c]
     [clj-time.format :as f]
     [clojure.string :as s]
@@ -145,4 +146,4 @@
   (layout :highscore (scores (db/get-top-scores 10))))
 
 (defpage  "/about" {}
-  (layout :about [:div#text (slurp "about.txt")]))
+  (layout :about [:div#text (slurpr "about.txt")]))

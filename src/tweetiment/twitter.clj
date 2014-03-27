@@ -1,5 +1,6 @@
 (ns tweetiment.twitter
   (:require
+   [tweetiment.util :refer [slurpr]]
    [oauth.client :refer :all]   
    [twitter.oauth :refer :all]
    [twitter.callbacks :refer :all]
@@ -9,7 +10,7 @@
   (:import
    (twitter.callbacks.protocols SyncSingleCallback)))
 
-(def config (edn/read-string (slurp "config.edn")))
+(def config (edn/read-string (slurpr "config.edn")))
 
 (def my-creds (make-oauth-creds (:api-key config)
                                 (:api-secret config)
