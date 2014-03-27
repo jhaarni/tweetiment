@@ -88,7 +88,10 @@
       (link-to 
         {:class "twitter-share-button" :data-lang "en"} 
         (str "https://twitter.com/share?text=" 
-          (url-encode (str "I got " num " as my Tweet Happiness Quotient! See yours at http://tweetiment.herokuapp.com")))
+          (url-encode 
+            (str 
+              "I got " num 
+              " as my Tweet Happiness Quotient! See yours at http://tweetiment.herokuapp.com")))
         "Tweet")])
 
 (defpartial error-page []
