@@ -91,7 +91,7 @@
           (url-encode 
             (str 
               "I got " num 
-              " as my Tweet Happiness Quotient! See yours at http://tweetiment.herokuapp.com")))
+              " as my Tweet Happiness Quotient! See yours at")))
         "Tweet")])
 
 (defpartial error-page []
