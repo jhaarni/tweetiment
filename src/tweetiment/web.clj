@@ -17,7 +17,7 @@
     [tweetiment.twitter :as tw]
     [tweetiment.dada :as db]))
 
-(def navigation {:home ["/" "Home"] :highscore ["/scores" "Highscores"] :about ["/about" "About"]})
+(def navigation {:home ["/" "Home"], :highscore ["/scores" "Highscores"], :about ["/about" "About"]})
 
 (defn get-return-uri [request]
    (str (name (:scheme request)) "://" (get (:headers request) "host") "/return"))
@@ -29,8 +29,13 @@
       n
       (link-to {:class "blue"} l n))))
 
-(defn seq-join [delim sequence]
-  (rest (interleave (repeat (count sequence) delim) sequence)))
+(defn seq-join [delim coll]
+  (rest 
+    (interleave 
+      (repeat 
+        (count coll) 
+        delim) 
+      coll)))
 
 (defn fmt-date [date]
   (let [dt (c/from-date date)
@@ -70,7 +75,7 @@
 (defpartial result [name num]
     [:div#small-image 
       (image {:height 90} "Twitter_logo_blue.png")]
-    [:div#result [(if (< num 0) :div.neg :div.thq) "THQ:" num]]
+    [:div#result [(if (neg? num) :div.neg :div.thq) "THQ:" num]]
     [:div#text 
       [:p (grade-sentiment num) num]
       [:p "Tweet to tell your followers how happy you are."]]
@@ -102,7 +107,7 @@
     [:table#pure-table-horizontal 
     [:tr  [:th "Name"] [:th "THQ"] [:th "Date"]]
     (for [score lst]
-      [:tr [:td (:NAME score)] [:td (:THQ score)] [:td (fmt-date (:TIMESTAMP score))]])]])
+      [:tr [:td (:name score)] [:td (:thq score)] [:td (fmt-date (:TIMESTAMP score))]])]])
 
 (set-page! 404 (layout :error (not-found)))
 
@@ -141,8 +146,3 @@
 
 (defpage  "/about" {}
   (layout :about [:div#text (slurp "about.txt")]))
-
-(defpage "/afinn" {} 
-  (layout :afinn [:div#pre [:pre (slurp "AFINN-README.txt")]]))
-
-

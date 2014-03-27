@@ -2,27 +2,26 @@
   (:require
     [clojure.java.jdbc :as sql]
     [clojure.java.io :as io]
-    [korma.db :refer [defdb]]
+    [korma.db :refer [defdb postgres]]
     [korma.core :refer :all]))
 
-(def db-spec {:classname "org.h2.Driver"
-              :subprotocol "h2"
-              :subname "happy"
-              :user "sa"
-              :password ""
-              :naming {:keys clojure.string/upper-case
-                       :fields clojure.string/upper-case}})
+(def database-url (or (System/getenv "DATABASE_URL")
+              "postgresql://janne:@localhost:5432/janne"))
+
+(declare count-scores)
 
 (defn db-initialized? []
-  (.exists (io/as-file  "happy.h2.db")))
+  (try (count-scores)
+    (catch Exception e (println "DATABASE NOT INITIALIZED"))))
 
 (defn create-highscore-table []
+  (println "CREATING HIGHSCORE TABLE")
   (sql/with-connection
-    db-spec
+    database-url
     (sql/create-table
       :highscore
-      [:id "INTEGER PRIMARY KEY AUTO_INCREMENT"]
-      [:timestamp :timestamp]
+      [:id :serial "PRIMARY KEY"]
+      [:timestamp :timestamp "NOT NULL" "DEFAULT CURRENT_TIMESTAMP"]
       [:name "varchar(30)"]
       [:thq "smallint"])
     (sql/do-commands
@@ -33,7 +32,16 @@
 (defn create-tables []
   (create-highscore-table))
 
-(defdb db db-spec)
+(defdb db 
+  (let [db-uri (java.net.URI. database-url)
+        [user pw] (clojure.string/split (.getUserInfo db-uri) #":")]
+    {:classname "org.postgresql.Driver"
+     :subprotocol "postgresql"
+     :user user
+     :password pw 
+     :subname (if (= -1 (.getPort db-uri))
+                (format "//%s%s" (.getHost db-uri) (.getPath db-uri))
+                (format "//%s:%s%s" (.getHost db-uri) (.getPort db-uri) (.getPath db-uri)))}))
 
 (defentity highscore)
 
@@ -41,17 +49,16 @@
   (insert highscore
     (values 
       {:name name
-       :thq quotient
-       :timestamp (new java.util.Date)})))
+       :thq quotient})))
 
-(defn get-scores []
-  (select highscore))
+(defn count-scores []
+  (select highscore (aggregate (count :id) :COUNT)))
 
 (defn get-top-scores [n]
   (select highscore 
-    (fields :NAME :THQ) 
-    (order :THQ :desc) 
-    (aggregate (max :TIMESTAMP) :TIMESTAMP) 
-    (group :NAME :THQ) 
+    (fields :name :thq) 
+    (order :thq :desc) 
+    (aggregate (max :timestamp) :TIMESTAMP) 
+    (group :name :thq) 
     (limit n)))
 
