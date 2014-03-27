@@ -139,11 +139,13 @@
       (redirect "/thq"))))
 
 (defpage [:get "/thq"] {}
-  (let [atoken (session/get :atoken)
-        sname (:screen_name atoken)
-        sent (trim-decimals (user-sentiment sname))]
-    (db/save-score sname sent)    
-    (layout :result (result sname sent))))
+  (if-let [atoken (session/get :atoken)]
+    (let [sname (:screen_name atoken)
+          sent (trim-decimals (user-sentiment sname))]
+      (db/save-score sname sent)    
+      (layout :result (result sname sent)))
+    ;else
+    (redirect "/")))
 
 (defpage [:get "/scores"] {}
   (layout :highscore (scores (db/get-top-scores 10))))
