@@ -6,4 +6,4 @@
 
 (defn -main [& m]
   (if-not (db/db-initialized?) (db/create-tables))
-  (server/start 8080 {:mode :prod}))
+  (server/start (or (System/getenv "PORT") 8080) {:mode :prod}))
