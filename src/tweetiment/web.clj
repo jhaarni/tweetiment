@@ -105,7 +105,7 @@
 (defpartial scores [lst]
   [:div#highscore
     [:h2 "Highscores"]
-    [:table#pure-table-horizontal 
+    [:table
     [:tr  [:th "Name"] [:th "THQ"] [:th "Date"]]
     (for [score lst]
       [:tr [:td (:name score)] [:td (:thq score)] [:td (fmt-date (:timestamp score))]])]])

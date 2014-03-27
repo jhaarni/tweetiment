@@ -3,8 +3,8 @@
 
 (defn as-resource [path]
   (when path
-    (-> (Thread/currentThread) .getContextClassLoader (.getResource path))))
+    (-> (Thread/currentThread) .getContextClassLoader (.getResourceAsStream path))))
 
 (defn slurpr [path]
-  (slurp (io/file (as-resource path))))
+  (slurp (as-resource path)))
 

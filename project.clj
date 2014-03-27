@@ -9,4 +9,7 @@
                  [noir "1.3.0"]
                  [twitter-api "0.7.5"]
                  [org.clojure/tools.reader "0.8.3"]]
-    :main tweetiment.server)
+    :min-lein-version "2.0.0"
+    :uberjar-name "tweetiment-standalone.jar"
+    :profiles {:uberjar {:aot :all}}
+    :main ^:skip-aot tweetiment.server)

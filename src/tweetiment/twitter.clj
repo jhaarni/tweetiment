@@ -13,7 +13,7 @@
 
 (def config 
   (if-let [res (as-resource "config.edn")] 
-    (edn/read-string (slurp (io/file res)))
+    (edn/read-string (slurp res))
     ;else
     {:api-key (System/getenv "TW_API_KEY")
      :api-secret (System/getenv "TW_API_SECRET")

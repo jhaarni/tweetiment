@@ -6,4 +6,4 @@
 
 (defn -main [& m]
   (if-not (db/db-initialized?) (db/create-tables))
-  (server/start 9090 {:mode :dev}))
+  (server/start 9090 {:mode :prod}))

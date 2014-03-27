@@ -41,5 +41,3 @@
   (sql/query db-uri
     ["select  name, thq, max(timestamp) as timestamp 
      from highscore group by name, thq order by thq desc limit ?" n]))
-
-
