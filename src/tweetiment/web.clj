@@ -31,12 +31,10 @@
       (link-to {:class "blue"} l n))))
 
 (defn seq-join [delim coll]
-  (rest 
-    (interleave 
-      (repeat 
-        (count coll) 
-        delim) 
-      coll)))
+  (-> (count coll)
+      (repeat delim)
+      (interleave coll)
+      rest))
 
 (defn fmt-date [date]
   (let [dt (c/from-date date)

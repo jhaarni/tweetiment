@@ -12,8 +12,8 @@
 (defn trim-decimals [n]
    (read-string (re-find #"\d+" (str n))))
 
-(defn tweets [lst]
-  (filter :text (json/read-str lst :key-fn keyword)))
+(defn tweets [coll]
+  (filter :text (json/read-str coll :key-fn keyword)))
 
 (defn make-pair [l]
   (s/split l #"\t+"))
@@ -37,9 +37,16 @@
 
 (defn average [lst] (/ (reduce + lst) (count lst)))
 
-(defn tweetlist-sentiment [lst]
-  (let [texts (map :text lst)]
-    (* 100 (double (average (map total-sentiment (map words texts)))))))
+(defn sentiments [coll]
+  (->> (map words coll)
+      (map total-sentiment)
+      (average)
+      (double)
+      (* 100)))
+
+(defn tweetlist-sentiment [coll]
+  (let [texts (map :text coll)] 
+    (sentiments texts)))
 
 (defn user-sentiment [user]
   (tweetlist-sentiment (:body (tw/timeline user))))

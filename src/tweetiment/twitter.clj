@@ -42,6 +42,6 @@
 (defn get-access-token [request-token verifier] 
   (access-token consumer request-token verifier))
 
-(defn timeline [user]
-  (statuses-user-timeline :oauth-creds my-creds :params {:screen-name user}))
+(defn timeline [user]  
+  (statuses-user-timeline :oauth-creds my-creds :params {:screen-name user :count 100}))
 
