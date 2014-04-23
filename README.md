@@ -10,4 +10,4 @@ lein run
 
 Copyright © 2014 jhaarni
 
-Distributed under the Eclipse Public License either version 1.0
+Distributed under the Eclipse Public License version 1.0
