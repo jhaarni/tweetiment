@@ -19,10 +19,13 @@
   (s/split l #"\t+"))
 
 (defn read-scores [f]
-  (let [lines (s/split-lines (slurpr f))
-        pairs (map make-pair lines)
-        raw-map (apply hash-map (flatten pairs))]
-    (fun/fmap read-string raw-map)))
+  (->> 
+    (slurpr f)
+    s/split-lines
+    (map make-pair)
+    flatten
+    (apply hash-map)
+    (fun/fmap read-string)))
 
 (def scores (read-scores "AFINN-111.txt"))
 
