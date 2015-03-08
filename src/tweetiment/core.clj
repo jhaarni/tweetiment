@@ -55,7 +55,7 @@
   (tweetlist-sentiment (:body (tw/timeline user))))
 
 (defn between [n low high]
-  (and (> n low) (<= n high)))
+  (< low  n (inc high)))
 
 (def result-text "Your Tweet Happiness Quotient is")
 

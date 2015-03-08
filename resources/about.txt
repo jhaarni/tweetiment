@@ -1,4 +1,4 @@
-<p>Happy Tweeter is copyright &copy; 2014 <a href="http://twitter.com/jhaarni">jhaarni</a></p>
+<p>Happy Tweeter is copyright &copy; 2014 <a href="http://twitter.com/xulfus">Janne Haarni</a></p>
 
 <p>
 The Tweet Happiness Quotient is calculated using the 
@@ -7,6 +7,6 @@ The Tweet Happiness Quotient is calculated using the
 according to the <a href="http://www.opendatacommons.org/licenses/odbl/1.0/">Open Database License (ODbL) v1.0</a>
 <p>Currently the database only supports the English language</p>
 </p>
-<p>Source code for this service is available on <a href="https://github.com/jhaarni/tweetiment">github</a> with <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a></p> 
+<p>Source code for this service is available on <a href="https://github.com/xulfus/tweetiment">github</a> with <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a></p> 
 <br/>
 

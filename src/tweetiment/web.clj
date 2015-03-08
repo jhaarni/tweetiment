@@ -30,12 +30,6 @@
       n
       (link-to {:class "blue"} l n))))
 
-(defn seq-join [delim coll]
-  (-> (count coll)
-      (repeat delim)
-      (interleave coll)
-      rest))
-
 (defn fmt-date [date]
   (let [dt (c/from-date date)
         fmt (f/formatter "MM/dd/yyyy")]
@@ -43,7 +37,7 @@
 
 (defpartial navi [current]
   [:div#navi  
-    (seq-join " | " (for [nav navigation] (navi-item nav current)))])
+    (interpose " | " (for [nav navigation] (navi-item nav current)))])
 
 (defpartial footer [nav]
         [:div#footer
