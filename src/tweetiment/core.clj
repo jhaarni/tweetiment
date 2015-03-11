@@ -6,8 +6,8 @@
             [clojure.algo.generic.functor :as fun]
             [tweetiment.twitter :as tw]))
 
-(defn words [s]
-  (map s/lower-case (re-seq #"[a-zA-Z]+" s)))
+(defn words [coll]
+  (map s/lower-case (re-seq #"[a-zA-Z]+" coll)))
 
 (defn trim-decimals [n]
    (read-string (re-find #"\d+" (str n))))
@@ -15,12 +15,12 @@
 (defn tweets [coll]
   (filter :text (json/read-str coll :key-fn keyword)))
 
-(defn make-pair [l]
-  (s/split l #"\t+"))
+(defn make-pair [pair-string]
+  (s/split pair-string #"\t+"))
 
-(defn read-scores [f]
+(defn read-scores [score-file]
   (->> 
-    (slurpr f)
+    (slurpr score-file)
     s/split-lines
     (map make-pair)
     flatten
@@ -29,16 +29,16 @@
 
 (def scores (read-scores "AFINN-111.txt"))
 
-(defn sentiment [a] 
-  (or (scores a) 0))
+(defn sentiment [wrd] 
+  (or (scores wrd) 0))
 
-(defn add-sentiment [n, s] 
-  (+ n (sentiment s)))
+(defn add-sentiment [n, snt] 
+  (+ n (sentiment snt)))
 
-(defn total-sentiment [v]
-  (reduce add-sentiment 0 (flatten v))) 
+(defn total-sentiment [coll]
+  (reduce add-sentiment 0 (flatten coll))) 
 
-(defn average [lst] (/ (reduce + lst) (count lst)))
+(defn average [coll] (/ (reduce + coll) (count coll)))
 
 (defn sentiments [coll]
   (->> (map words coll)

@@ -6,8 +6,6 @@
 (def db-uri 
   (or (System/getenv "DATABASE_URL") "postgresql://janne:@localhost:5432/janne"))
 
-(declare count-scores)
-
 (defn db-initialized? []
   (-> (sql/query db-uri
         ["select count(*) from information_schema.tables 
@@ -29,7 +27,6 @@
 
 (defn create-tables []
   (create-highscore-table))
-
 
 (defn save-score [name quotient]
   (sql/insert! db-uri

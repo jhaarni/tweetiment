@@ -20,6 +20,8 @@
 
 (def navigation {:home ["/" "Home"], :highscore ["/scores" "Highscores"], :about ["/about" "About"]})
 
+(def css-filename (str "happy.css?r=" (rand-int 1000)))
+
 (defn get-return-uri [request]
    (str (name (:scheme request)) "://" (get (:headers request) "host") "/return"))
 
@@ -47,7 +49,7 @@
   (html5
     [:head
       [:title "Happy Tweeter"] 
-      (include-css "happy.css?r=1")]
+      (include-css css-filename)] 
     [:body 
       [:div#wrap
       [:div#content
