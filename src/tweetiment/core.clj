@@ -42,10 +42,10 @@
 
 (defn sentiments [coll]
   (->> (map words coll)
-      (map total-sentiment)
-      (average)
-      (double)
-      (* 100)))
+       (map total-sentiment)
+       (average)
+       (double)
+       (* 100)))
 
 (defn tweetlist-sentiment [coll]
   (let [texts (map :text coll)] 
