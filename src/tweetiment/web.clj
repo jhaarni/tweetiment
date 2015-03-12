@@ -23,7 +23,7 @@
 (def css-filename (str "happy.css?r=" (rand-int 1000)))
 
 (defn get-return-uri [request]
-   (str (name (:scheme request)) "://" (get (:headers request) "host") "/return"))
+  (str (name (:scheme request)) "://" (get (:headers request) "host") "/return"))
 
 (defn navi-item [nav current]
   (let [k (key nav)
@@ -39,70 +39,70 @@
 
 (defpartial navi [current]
   [:div#navi  
-    (interpose " | " (for [nav navigation] (navi-item nav current)))])
+   (interpose " | " (for [nav navigation] (navi-item nav current)))])
 
 (defpartial footer [nav]
-        [:div#footer
-        [:span#footer-text [:p#navi nav]]])
+  [:div#footer
+   [:span#footer-text [:p#navi nav]]])
 
 (defpartial layout [nav & content]
   (html5
-    [:head
-      [:title "Happy Tweeter"] 
-      (include-css css-filename)] 
-    [:body 
-      [:div#wrap
-      [:div#content
-        [:div#title [:h1 "Happy Tweeter"]]
-        content]]
-      (footer (navi nav))]))
+   [:head
+    [:title "Happy Tweeter"] 
+    (include-css css-filename)] 
+   [:body 
+    [:div#wrap
+     [:div#content
+      [:div#title [:h1 "Happy Tweeter"]]
+      content]]
+    (footer (navi nav))]))
 
 (defpartial happy []
   [:div#image
-    (image {:height 150} "Twitter_logo_blue.png")]
+   (image {:height 150} "Twitter_logo_blue.png")]
   [:div#text
-    [:p "Happy Tweeter will read your recent tweets to see how happy you are!"]
-    [:p "Just sign in with Twitter and Go!"]]
+   [:p "Happy Tweeter will read your recent tweets to see how happy you are!"]
+   [:p "Just sign in with Twitter and Go!"]]
   [:div#login 
-    [:a {:href "/auth"}
-      (image {:height 25} "sign-in-with-twitter-gray.png")]])
+   [:a {:href "/auth"}
+    (image {:height 25} "sign-in-with-twitter-gray.png")]])
     
 (defpartial result [name num]
-    [:div#small-image 
-      (image {:height 90} "Twitter_logo_blue.png")]
-    [:div#result [(if (neg? num) :div.neg :div.thq) "THQ:" num]]
-    [:div#text 
-      [:p (grade-sentiment num) num]
-      [:p "Tweet to tell your followers how happy you are."]]
-    [:script "!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];
+  [:div#small-image 
+   (image {:height 90} "Twitter_logo_blue.png")]
+  [:div#result [(if (neg? num) :div.neg :div.thq) "THQ:" num]]
+  [:div#text 
+   [:p (grade-sentiment num) num]
+   [:p "Tweet to tell your followers how happy you are."]]
+  [:script "!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];
         if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
         js.src='https://platform.twitter.com/widgets.js';
         fjs.parentNode.insertBefore(js,fjs);}}(document,'script','twitter-wjs');"]
-    [:div#tweet 
-      (link-to 
-        {:class "twitter-share-button" :data-lang "en"} 
-        (str "https://twitter.com/share?text=" 
-          (url-encode 
-            (str 
-              "I got " num 
-              " as my Tweet Happiness Quotient! See yours at")))
-        "Tweet")])
+  [:div#tweet 
+   (link-to 
+    {:class "twitter-share-button" :data-lang "en"} 
+    (str "https://twitter.com/share?text=" 
+         (url-encode 
+          (str 
+           "I got " num 
+           " as my Tweet Happiness Quotient! See yours at")))
+    "Tweet")])
 
 (defpartial error-page []
   [:div [:h2#error "Sorry!"]]
   [:div#text 
-    [:p "I am sorry, something went wrong. This makes me somewhat unhappy."]
-    [:p "Hopefully you have better luck next time."]])
+   [:p "I am sorry, something went wrong. This makes me somewhat unhappy."]
+   [:p "Hopefully you have better luck next time."]])
 
 (defpartial not-found []
   [:div [:h2#error "Sorry!"]]
   [:div#text 
-    [:p "I am sorry, there's nothing here by that name."]])
+   [:p "I am sorry, there's nothing here by that name."]])
 
 (defpartial scores [lst]
   [:div#highscore
-    [:h2 "Highscores"]
-    [:table
+   [:h2 "Highscores"]
+   [:table
     [:tr  [:th "Name"] [:th "THQ"] [:th "Date"]]
     (for [score lst]
       [:tr [:td (:name score)] [:td (:thq score)] [:td (fmt-date (:timestamp score))]])]])
@@ -126,9 +126,9 @@
     (redirect "/")
     ; else
     (let [token (:oauth_token params)
-      rtoken (session/get :rtoken)
-      verifier (:oauth_verifier params)
-      atoken (tw/get-access-token rtoken verifier)]
+          rtoken (session/get :rtoken)
+          verifier (:oauth_verifier params)
+          atoken (tw/get-access-token rtoken verifier)]
       (session/put! :atoken atoken)
       (redirect "/thq"))))
 

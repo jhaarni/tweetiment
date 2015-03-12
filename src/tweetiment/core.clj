@@ -20,12 +20,12 @@
 
 (defn read-scores [score-file]
   (->> 
-    (slurpr score-file)
-    s/split-lines
-    (map make-pair)
-    flatten
-    (apply hash-map)
-    (fun/fmap read-string)))
+   (slurpr score-file)
+   s/split-lines
+   (map make-pair)
+   flatten
+   (apply hash-map)
+   (fun/fmap read-string)))
 
 (def scores (read-scores "AFINN-111.txt"))
 
@@ -61,11 +61,11 @@
 
 (defn grade-sentiment [n]
   (cond
-    (<= n 0) (str "Oops.. " result-text " a sorry ")
-    (between n 0 50) (str result-text " a meager ")
-    (between n 50 100) (str "Nice! " result-text " a great ")
-    (between n 100 150) (str "Congratulations! " result-text " a whopping ")
-    (between n 150 200) (str "Fabulous! " result-text " an awesome ")
-    (> n 200) (str "Incredible!! " result-text " an unbelievable ")))
+   (<= n 0) (str "Oops.. " result-text " a sorry ")
+   (between n 0 50) (str result-text " a meager ")
+   (between n 50 100) (str "Nice! " result-text " a great ")
+   (between n 100 150) (str "Congratulations! " result-text " a whopping ")
+   (between n 150 200) (str "Fabulous! " result-text " an awesome ")
+   (> n 200) (str "Incredible!! " result-text " an unbelievable ")))
 
 
