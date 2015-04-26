@@ -6,16 +6,24 @@
             [clojure.algo.generic.functor :as fun]
             [tweetiment.twitter :as tw]))
 
-(defn words [coll]
-  (map s/lower-case (re-seq #"[a-zA-Z]+" coll)))
+(defn words
+  "takes a tweet and returns lower case words ass a seq"
+  [tweet]
+  (map s/lower-case (re-seq #"[a-zA-Z]+" tweet)))
 
-(defn trim-decimals [n]
+(defn trim-decimals
+  "removes decimals from number"
+  [n]
    (read-string (re-find #"\d+" (str n))))
 
-(defn tweets [coll]
-  (filter :text (json/read-str coll :key-fn keyword)))
+(defn tweets
+  "extract tweet text contents from json twitter timeline"
+  [json-string]
+  (filter :text (json/read-str json-string :key-fn keyword)))
 
-(defn make-pair [pair-string]
+(defn make-pair
+  "extract words from a tab separated string"
+  [pair-string]
   (s/split pair-string #"\t+"))
 
 (defn read-scores [score-file]
