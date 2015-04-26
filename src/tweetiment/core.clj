@@ -7,7 +7,7 @@
             [tweetiment.twitter :as tw]))
 
 (defn words
-  "takes a tweet and returns lower case words ass a seq"
+  "takes a tweet and returns lower case words as a seq"
   [tweet]
   (map s/lower-case (re-seq #"[a-zA-Z]+" tweet)))
 
