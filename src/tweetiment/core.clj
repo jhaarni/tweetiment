@@ -16,11 +16,6 @@
   [n]
    (read-string (re-find #"\d+" (str n))))
 
-(defn tweets
-  "extract tweet text contents from json twitter timeline"
-  [json-string]
-  (filter :text (json/read-str json-string :key-fn keyword)))
-
 (defn make-pair
   "extract words from a tab separated string"
   [pair-string]
